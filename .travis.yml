@@ -12,8 +12,6 @@ addons:
       - libssl-dev
 
 before_script:
-  - git clone https://github.com/facebook/folly.git
-  # will change PATH so we find cmake,...
   - source ./build/travis_${TRAVIS_OS_NAME}.sh
 
 script:
