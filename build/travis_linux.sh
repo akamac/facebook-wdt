@@ -40,7 +40,7 @@ git clone https://github.com/google/glog.git
 (mkdir glog/build; cd glog/build; cmake -DINCLUDE_DIRECTORIES=$HOME/include -DCMAKE_INSTALL_PREFIX=$HOME -DBUILD_SHARED_LIBS=on .. && make -j 4 && make install)
 git clone https://github.com/facebook/folly.git
 pwd ; ls -l
-cd wdt
+cd facebook-wdt
 
 #set +e
 set +x
