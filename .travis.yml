@@ -1,39 +1,22 @@
 language: cpp
 dist: xenial
-compiler:
-  - clang
-  - gcc
-
+compiler: gcc
 addons:
   apt:
-    sources:
-      - boost-latest
-      - ubuntu-toolchain-r-test
-      - llvm-toolchain-precise-3.6
     packages:
-      - g++-4.9
-      - clang-3.6
-      - libboost-system1.55-dev
-      - libboost-filesystem1.55-dev
-#      - libssl-dev
-#      - openssl-1.0.1f
+      - libgoogle-glog-dev
+      - libboost-system-dev
+      - libdouble-conversion-dev
+      - libjemalloc-dev
+      - libboost-all-dev
+      - libssl-dev
 
-script:
-  # Debug
-  - date ; uname -a ; pwd ; ls -l ..; echo $HOSTNAME
-  # Build
-  - mkdir ../build && cd ../build
-  - echo $PATH; echo $LD_LIBRARY_PATH
-  - which $CXX
-  - cmake ../wdt -DBUILD_TESTING=1
-  #- make -j 4 VERBOSE=1
-  - make -j 4
-  #- WDT_TEST_SYMLINKS=0 CTEST_OUTPUT_ON_FAILURE=1 make test
-  - CTEST_OUTPUT_ON_FAILURE=1 make test
-  # to see the full output/debug:
-  #- ../wdt_e2e_simple_test.sh
-
-before_install:
-  - echo "Travis os name $TRAVIS_OS_NAME"
+before_script:
+  - git clone https://github.com/facebook/folly.git
   # will change PATH so we find cmake,...
   - source ./build/travis_${TRAVIS_OS_NAME}.sh
+
+script:
+  - cmake wdt -DBUILD_TESTING=on
+  - make -j 4
+  - CTEST_OUTPUT_ON_FAILURE=1 make test
