@@ -15,6 +15,6 @@ before_script:
   - source ./build/travis_${TRAVIS_OS_NAME}.sh
 
 script:
-  - cmake wdt -DBUILD_TESTING=on
+  - cmake facebook-wdt -DBUILD_TESTING=on
   - make -j 4
   - CTEST_OUTPUT_ON_FAILURE=1 make test
